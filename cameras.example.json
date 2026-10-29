@@ -1,0 +1,16 @@
+{
+  "_comment": "คัดลอกไฟล์นี้เป็น cameras.json แล้วแก้ค่าให้ตรงกับ NVR/กล้องของคุณ",
+  "_rtsp_help": "rtsp://USER:PASSWORD@IP:554/<path>  เช่น Hikvision: rtsp://admin:pass@192.168.1.64:554/Streaming/Channels/101  | Dahua: rtsp://admin:pass@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0",
+  "cameras": [
+    {
+      "id": "cam1",
+      "name": "หน้าบ้าน",
+      "rtsp": "rtsp://admin:password@192.168.1.64:554/Streaming/Channels/101"
+    },
+    {
+      "id": "cam2",
+      "name": "หลังบ้าน",
+      "rtsp": "rtsp://admin:password@192.168.1.65:554/Streaming/Channels/101"
+    }
+  ]
+}

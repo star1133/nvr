@@ -1,0 +1,146 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, "Segoe UI", "Noto Sans Thai", sans-serif;
+  background: #11151c;
+  color: #e6e9ef;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #1a212c;
+  border-bottom: 1px solid #2a3340;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+h1 { font-size: 20px; font-weight: 600; }
+.controls { display: flex; align-items: center; gap: 14px; }
+.controls label { display: flex; align-items: center; gap: 6px; font-size: 14px; color: #9aa6b8; }
+select, button {
+  background: #2a3340;
+  color: #e6e9ef;
+  border: 1px solid #3a4656;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover { background: #34404f; }
+main {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+.tile {
+  position: relative;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #2a3340;
+}
+.tile video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+.tile .label {
+  position: absolute;
+  left: 8px; bottom: 8px;
+  background: rgba(0,0,0,.6);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.tile .status {
+  position: absolute;
+  right: 8px; top: 8px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(0,0,0,.6);
+}
+.status.live  { color: #4ade80; }
+.status.error { color: #f87171; }
+.status.load  { color: #fbbf24; }
+
+/* แผงควบคุม PTZ (โผล่เมื่อชี้เมาส์ที่ tile) */
+.ptz {
+  position: absolute;
+  right: 10px; bottom: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+  grid-template-rows: repeat(3, 30px);
+  gap: 4px;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.tile:hover .ptz { opacity: 1; }
+.ptz-btn {
+  width: 30px; height: 30px; padding: 0;
+  border-radius: 6px;
+  background: rgba(20,26,34,.78);
+  border: 1px solid #3a4656;
+  color: #e6e9ef;
+  font-size: 13px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.ptz-btn:hover { background: rgba(37,99,235,.85); }
+.ptz-up    { grid-column: 2; grid-row: 1; }
+.ptz-left  { grid-column: 1; grid-row: 2; }
+.ptz-right { grid-column: 3; grid-row: 2; }
+.ptz-down  { grid-column: 2; grid-row: 3; }
+.ptz-in    { grid-column: 1; grid-row: 1; }
+.ptz-out   { grid-column: 1; grid-row: 3; }
+
+/* ปุ่ม/ลิงก์ */
+.btn {
+  background: #2a3340; color: #e6e9ef; border: 1px solid #3a4656;
+  border-radius: 6px; padding: 6px 12px; font-size: 14px;
+  text-decoration: none; display: inline-block;
+}
+.btn:hover { background: #34404f; }
+button.primary, .btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+button.primary:hover { background: #1d4ed8; }
+button.danger { background: #3a2330; border-color: #5a2a3a; color: #f87171; }
+button.danger:hover { background: #4a2a3a; }
+
+/* หน้าตั้งค่า */
+.settings { padding: 20px; max-width: 1000px; margin: 0 auto; }
+.hint { color: #9aa6b8; font-size: 14px; margin-bottom: 16px; line-height: 1.6; }
+.cam-card {
+  background: #1a212c; border: 1px solid #2a3340; border-radius: 10px;
+  padding: 16px; margin-bottom: 14px;
+}
+.grid2 {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.grid2 label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: #9aa6b8; }
+.grid2 input, .grid2 select {
+  background: #11151c; color: #e6e9ef; border: 1px solid #3a4656;
+  border-radius: 6px; padding: 8px 10px; font-size: 14px;
+}
+.cam-actions {
+  display: flex; align-items: center; gap: 12px; margin-top: 14px;
+  flex-wrap: wrap;
+}
+.cam-actions .del { margin-left: auto; }
+.test-result { font-size: 13px; }
+.test-result.ok { color: #4ade80; }
+.test-result.err { color: #f87171; }
+.test-result.load { color: #fbbf24; }
+.savemsg { margin-top: 14px; font-size: 14px; }
+.savemsg.ok { color: #4ade80; }
+.savemsg.err { color: #f87171; }
+
+/* แผงผลค้นหา ONVIF */
+.discover-panel {
+  background: #1a212c; border: 1px solid #2a3340; border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 16px;
+}
+.disc-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 8px 0; border-top: 1px solid #2a3340; font-size: 14px;
+}
+.disc-row:first-of-type { border-top: none; }

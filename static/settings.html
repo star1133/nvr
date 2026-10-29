@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ตั้งค่ากล้อง — NVR</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>⚙️ ตั้งค่ากล้อง</h1>
+    <div class="controls">
+      <a class="btn" href="/">← กลับไปดูกล้อง</a>
+      <button id="discover">🔍 ค้นหากล้อง ONVIF</button>
+      <button id="add">+ เพิ่มกล้อง</button>
+      <button id="save" class="primary">บันทึก & ใช้งาน</button>
+    </div>
+  </header>
+  <main class="settings">
+    <p class="hint">กรอก IP กล้อง + ชื่อผู้ใช้ + รหัสผ่าน แล้วเลือกยี่ห้อ ระบบจะสร้าง RTSP URL ให้อัตโนมัติ
+       กด <b>ทดสอบ</b> เพื่อเช็คก่อน แล้วกด <b>บันทึก &amp; ใช้งาน</b><br>
+       หรือเลือกยี่ห้อ <b>ONVIF</b> แล้วกด <b>ดึงจาก ONVIF</b> ให้ระบบหา RTSP/snapshot/PTZ ให้อัตโนมัติ
+       — หรือกด <b>🔍 ค้นหากล้อง ONVIF</b> เพื่อสแกนหากล้องในวงแลน</p>
+    <div id="discover-panel" class="discover-panel" style="display:none"></div>
+    <div id="list"></div>
+    <p id="savemsg" class="savemsg"></p>
+  </main>
+
+  <template id="row-tmpl">
+    <div class="cam-card">
+      <div class="grid2">
+        <label>ชื่อกล้อง<input class="f-name" placeholder="เช่น หน้าบ้าน" /></label>
+        <label>ยี่ห้อ<select class="f-brand"></select></label>
+        <label>IP กล้อง<input class="f-ip" placeholder="192.168.1.64" /></label>
+        <label>พอร์ต<input class="f-port" type="number" value="554" /></label>
+        <label>ชื่อผู้ใช้<input class="f-username" placeholder="admin" /></label>
+        <label>รหัสผ่าน<input class="f-password" type="password" placeholder="••••••" /></label>
+        <label>ช่อง (channel)<input class="f-channel" type="number" value="1" min="1" /></label>
+        <label>คุณภาพ<select class="f-stream">
+          <option value="main">main (ความละเอียดสูง)</option>
+          <option value="sub">sub (เบา ลื่นกว่า)</option>
+        </select></label>
+        <label>Transport<select class="f-transport">
+          <option value="tcp">TCP (ปกติ)</option>
+          <option value="udp">UDP (กล้องบางรุ่น เช่น XiongMai)</option>
+        </select></label>
+        <label>วิดีโอ<select class="f-transcode">
+          <option value="">copy (ไม่แปลง · CPU ต่ำ)</option>
+          <option value="h264">แปลงเป็น H.264 (กล้อง H.265 · เปลือง CPU)</option>
+        </select></label>
+        <label class="f-path-wrap" style="display:none">Path เอง<input class="f-path" placeholder="/stream1" /></label>
+        <label class="f-onvif-wrap" style="display:none">พอร์ต ONVIF<input class="f-onvif-port" type="number" value="80" /></label>
+        <label class="f-profile-wrap" style="display:none">โปรไฟล์ ONVIF<select class="f-profile"></select></label>
+      </div>
+      <div class="cam-actions">
+        <button class="probe" style="display:none">ดึงจาก ONVIF</button>
+        <button class="test">ทดสอบการเชื่อมต่อ</button>
+        <span class="test-result"></span>
+        <button class="del danger">ลบ</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="/settings.js"></script>
+</body>
+</html>

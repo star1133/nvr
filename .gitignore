@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+cameras.json
+*.pyc
+.pytest_cache/
+*.log
